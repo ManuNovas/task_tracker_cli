@@ -7,6 +7,9 @@ class TaskInputAdapter:
     def __init__(self):
         self.input_port = TaskInputPort()
 
+    def task_not_found(self, id: int):
+        print(f"Task {str(id)} doesn't exists")
+
     def main(self, argv: list[str]):
         argl = len(argv)
         if argl < 2:
@@ -24,6 +27,13 @@ class TaskInputAdapter:
             if task is not None:
                 print(f"Updated task with ID {str(task.id)}")
             else:
-                print(f"Task {id} doesn't exists")
+                self.task_not_found(id)
+        elif command == "delete" and argl == 3:
+            id = int(argv[2])
+            task = self.input_port.delete(id)
+            if task is not None:
+                print(f"Deleted task with ID {str(task.id)}")
+            else:
+                self.task_not_found(id)
         else:
             print("Unknown command or not enough args to execute")

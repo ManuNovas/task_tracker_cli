@@ -26,7 +26,7 @@ class TaskRepository:
 
     def get_next_id(self) -> int:
         self.get_data()
-        return len(self.data) + 1
+        return self.data[-1]["id"] + 1
 
     def add(self, task: Task):
         self.get_data()
@@ -52,5 +52,14 @@ class TaskRepository:
         for current_task in self.data:
             if current_task["id"] == task.id:
                 self.data[i] = task.to_json()
+            i += 1
+        self.save_data()
+
+    def delete(self, task: Task):
+        self.get_data()
+        i = 0
+        for current_task in self.data:
+            if current_task["id"] == task.id:
+                self.data.pop(i)
             i += 1
         self.save_data()

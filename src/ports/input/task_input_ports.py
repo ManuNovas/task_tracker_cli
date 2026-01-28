@@ -29,3 +29,10 @@ class TaskInputPort:
         task.set_description(description)
         self.repository.update(task)
         return task
+
+    def delete(self, id: int):
+        task = self.repository.find_by_id(id)
+        if task is None:
+            return None
+        self.repository.delete(task)
+        return task
