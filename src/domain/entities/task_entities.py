@@ -26,3 +26,10 @@ class Task:
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
         }
+    
+    def set_updated_at(self):
+        self.updated_at = datetime.now()
+    
+    def set_description(self, description):
+        self.description = description
+        self.set_updated_at()

@@ -21,3 +21,11 @@ class TaskInputPort:
         )
         self.repository.add(task)
         return task
+    
+    def update(self, id: int, description: str):
+        task = self.repository.find_by_id(id)
+        if task is None:
+            return None
+        task.set_description(description)
+        self.repository.update(task)
+        return task
