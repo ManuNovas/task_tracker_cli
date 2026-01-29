@@ -48,3 +48,5 @@ class TaskInputPort:
     def mark_in_progress(self, id: int):
         return self.mark_status(id, TaskStatus.IN_PROGRESS)
 
+    def mark_done(self, id: int):
+        return self.mark_status(id, TaskStatus.DONE)
