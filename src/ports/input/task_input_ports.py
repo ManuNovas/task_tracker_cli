@@ -36,3 +36,15 @@ class TaskInputPort:
             return None
         self.repository.delete(task)
         return task
+    
+    def mark_status(self, id: int, status: TaskStatus):
+        task = self.repository.find_by_id(id)
+        if task is None:
+            return None
+        task.set_status(status)
+        self.repository.update(task)
+        return task
+    
+    def mark_in_progress(self, id: int):
+        return self.mark_status(id, TaskStatus.IN_PROGRESS)
+

@@ -30,6 +30,10 @@ class Task:
     def set_updated_at(self):
         self.updated_at = datetime.now()
     
-    def set_description(self, description):
+    def set_description(self, description: str):
         self.description = description
+        self.set_updated_at()
+
+    def set_status(self, status: TaskStatus):
+        self.status = status
         self.set_updated_at()

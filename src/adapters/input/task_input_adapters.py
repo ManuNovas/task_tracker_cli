@@ -35,5 +35,12 @@ class TaskInputAdapter:
                 print(f"Deleted task with ID {str(task.id)}")
             else:
                 self.task_not_found(id)
+        elif command == "mark-in-progress" and argl == 3:
+            id = int(argv[2])
+            task = self.input_port.mark_in_progress(id)
+            if task is not None:
+                print(f"Marked task {id} in progress")
+            else:
+                self.task_not_found(id)
         else:
             print("Unknown command or not enough args to execute")
