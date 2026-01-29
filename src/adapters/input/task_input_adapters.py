@@ -49,5 +49,11 @@ class TaskInputAdapter:
                 print(f"Marked task {id} done")
             else:
                 self.task_not_found(id)
+        elif command == "list":
+            status = argv[2] if len(argv) > 2 else None
+            tasks = self.input_port.list(status)
+            for task in tasks:
+                print(f"{task["id"]}. {task["description"]} - {task["status"]}")
         else:
             print("Unknown command or not enough args to execute")
+        return 0

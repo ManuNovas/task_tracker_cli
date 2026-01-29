@@ -50,3 +50,10 @@ class TaskInputPort:
 
     def mark_done(self, id: int):
         return self.mark_status(id, TaskStatus.DONE)
+
+    def list(self, status: str | None):
+        try:
+            status = TaskStatus(status) if status is not None else None
+            return self.repository.list(status)
+        except ValueError:
+            return []

@@ -26,7 +26,7 @@ class TaskRepository:
 
     def get_next_id(self) -> int:
         self.get_data()
-        return self.data[-1]["id"] + 1
+        return (self.data[-1]["id"] + 1) if len(self.data) > 0 else 1
 
     def add(self, task: Task):
         self.get_data()
@@ -63,3 +63,14 @@ class TaskRepository:
                 self.data.pop(i)
             i += 1
         self.save_data()
+
+    def list(self, status: TaskStatus | None):
+        self.get_data()
+        if status is not None:
+            tasks = []
+            for task in self.data:
+                if task["status"] == status.value:
+                    tasks.append(task)
+        else:
+            tasks = self.data
+        return tasks
